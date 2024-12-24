@@ -1,19 +1,11 @@
 import React, { useState } from 'react';
 import { MenuFoldOutlined, MenuUnfoldOutlined, SettingOutlined, UserOutlined } from '@ant-design/icons';
 import type { MenuProps } from 'antd';
-import { Button, Flex, Layout, Menu, theme } from 'antd';
+import { Button, Flex, Layout, Menu, theme, Typography } from 'antd';
 import { Outlet, useNavigate } from 'react-router-dom';
 import { SERVICES } from '@/pages/Services/constants';
 
 const { Header, Content, Sider } = Layout;
-
-const items1: MenuProps['items'] = ['1', '2', '3'].map((key) => ({
-  key,
-  label: `nav ${key}`,
-}));
-
-
-
 
 const LayoutMain: React.FC = () => {
   const [collapsed, setCollapsed] = useState<boolean>(false)
@@ -50,15 +42,10 @@ const LayoutMain: React.FC = () => {
 
   return (
     <Layout>
-      <Header style={{ display: 'flex', alignItems: 'center' }} className='fixed inset-x-0 z-header'>
-        <div className="demo-logo" />
-        <Menu
-          theme="dark"
-          mode="horizontal"
-          defaultSelectedKeys={[location.pathname]}
-          items={items1}
-          style={{ flex: 1, minWidth: 0 }}
-        />
+      <Header style={{ display: 'flex', alignItems: 'center' }} className='fixed inset-x-0 z-header flex items-center'>
+        <Typography.Text className='text-white text-[20px] font-bold'>
+          SWAGGER
+        </Typography.Text>
       </Header>
       <Content style={{ padding: '0 48px', paddingTop: 100 }} className='h-screen'>
         <Layout
