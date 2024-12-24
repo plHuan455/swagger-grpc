@@ -1,0 +1,98 @@
+$font-path: "/fonts/";
+
+// Sofia
+@font-face {
+  font-display: swap;
+  font-family: "Sofia";
+  font-style: normal;
+  font-weight: 700;
+  src: url("#{$font-path}SofiaSans.ttf") format("truetype");
+}
+
+
+// Share Text Mono
+@font-face {
+  font-display: swap;
+  font-family: "Share Tech Mono";
+  font-style: normal;
+  font-weight: 400;
+  src: url("#{$font-path}ShareTechMono-Regular.ttf") format("truetype");
+}
+
+
+// Roboto mono
+@font-face {
+  font-display: swap;
+  font-family: "Roboto mono";
+  font-style: normal;
+  font-weight: 400;
+  src: url("#{$font-path}RobotoMono.ttf") format("truetype");
+}
+@font-face {
+  font-display: swap;
+  font-family: "Roboto mono";
+  font-style: normal;
+  font-weight: 500;
+  src: url("#{$font-path}RobotoMono.ttf") format("truetype");
+}
+@font-face {
+  font-display: swap;
+  font-family: "Roboto mono";
+  font-style: normal;
+  font-weight: 600;
+  src: url("#{$font-path}RobotoMono.ttf") format("truetype");
+}
+@font-face {
+  font-display: swap;
+  font-family: "Roboto mono";
+  font-style: normal;
+  font-weight: 700;
+  src: url("#{$font-path}RobotoMono.ttf") format("truetype");
+}
+
+// Robert Pro
+@font-face {
+  font-display: swap;
+  font-family: "Robert Pro";
+  font-style: normal;
+  font-weight: 700;
+  src: url("#{$font-path}RobertPro.woff2") format("woff2");
+}
+@font-face {
+  font-display: swap;
+  font-family: "Robert Pro";
+  font-style: normal;
+  font-weight: 600;
+  src: url("#{$font-path}RobertPro.woff2") format("woff2");
+}
+
+// Martian Mono
+@font-face {
+  font-display: swap;
+  font-family: "Martian Mono";
+  font-style: normal;
+  font-weight: 400;
+  src: url("#{$font-path}MartianMono.ttf") format("truetype");
+}
+@font-face {
+  font-display: swap;
+  font-family: "Martian Mono";
+  font-style: normal;
+  font-weight: 500;
+  src: url("#{$font-path}MartianMono.ttf") format("truetype");
+}
+@font-face {
+  font-display: swap;
+  font-family: "Martian Mono";
+  font-style: normal;
+  font-weight: 600;
+  src: url("#{$font-path}MartianMono.ttf") format("truetype");
+}
+@font-face {
+  font-display: swap;
+  font-family: "Martian Mono";
+  font-style: normal;
+  font-weight: 700;
+  src: url("#{$font-path}MartianMono.ttf") format("truetype");
+}
+
