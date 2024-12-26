@@ -1,32 +1,41 @@
+
+
 import { FieldInfo } from "@bufbuild/protobuf"
-import { Button, Col, Divider, Flex, Row } from "antd"
-import TextArea from "antd/es/input/TextArea"
+import { Button, Col, Divider, Flex, Row, Typography } from "antd"
 import { useState } from "react"
 import { CopyOutlined } from '@ant-design/icons';
 import { copyClipboard } from "@/utils/common";
 import { useMutation } from "react-query";
 import { JsonViewer } from '@textea/json-viewer'
+import { JsonEditor, githubLightTheme } from 'json-edit-react'
+
 interface Props {
   fieldInfos: FieldInfo[]
-  onSubmitFn: (data: string) => Promise<any>
+  onSubmitFn: (data: object) => Promise<any>
 }
 
 export default function Fields({ fieldInfos, onSubmitFn }: Props) {
-  const [inputValue, setInputValue] = useState<string>("{\n}")
+
+  const [inputData, setInputData] = useState<object>({})
   const {mutate, isLoading, data, error} = useMutation({
     mutationKey: ['test'],
     mutationFn: onSubmitFn
   })
 
-
   return <div>
     <Row gutter={[24, 24]}>
-      <Col span={20} className="relative min-h-[100px]">
+      <Col span={20} className="relative min-h-[200px]">
         <Flex className="absolute inset-0 flex-col">
-          <TextArea rows={4} className="grow text-foreground-400" value={inputValue} onChange={(e) => setInputValue(e.target.value)} />
+          {/* <TextArea rows={4} className="grow text-foreground-400" value={inputValue} onChange={(e) => setInputValue(e.target.value)} /> */}
+          <JsonEditor
+          className="h-full"
+            data={inputData}
+            theme={githubLightTheme}
+            setData={(data) => {setInputData(data as any)}}
+          />
           <Flex justify="end" className="mt-3">
             <Button color="primary" variant="solid" onClick={() => [
-              mutate(inputValue)
+              mutate(onSubmitFn)
             ]}
               loading={isLoading}
             >
@@ -42,6 +51,12 @@ export default function Fields({ fieldInfos, onSubmitFn }: Props) {
               <Button type="text" iconPosition="end" icon={<CopyOutlined className="text-foreground-400/80 group-hover/slot:opacity-100 opacity-0 duration-200" />} className="" size="small"
                 onClick={() => {
                   copyClipboard(`"${value.name}":`)
+                  if(!inputData[value.name]) {
+                    setInputData(preState => ({
+                      ...preState,
+                      [value.name]: ""
+                    }))
+                  }
                 }}
               >
                 {value.name}
@@ -60,7 +75,7 @@ export default function Fields({ fieldInfos, onSubmitFn }: Props) {
       </div>}
 
     {error && <div className="min-h-[200px] max-h-[500px] overflow-auto">
-        <Divider className="text-red-500">Response error</Divider>
+        <Divider className="text-red-500"><Typography.Text className='text-red-500 text-[1rem]'>Response error</Typography.Text></Divider>
         <div>
           <JsonViewer theme={'light'} rootName={false} value={data} />
         </div>

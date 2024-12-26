@@ -13,6 +13,8 @@ const PageSetting: React.FC = () => {
 
   const handleChange = () => {
     localStorage.setItem(LOCALSTORAGE.GRPC_URL, grpcServer)
+    localStorage.setItem(LOCALSTORAGE.TENANT_ID, tenantId)
+
     messageApi.open({
       type: 'success',
       content: 'Configs have been updated',

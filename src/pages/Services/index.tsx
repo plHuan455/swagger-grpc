@@ -1,11 +1,11 @@
-import { Collapse } from 'antd';
+import { Collapse, message } from 'antd';
 import { useParams } from 'react-router-dom';
 import { SERVICES } from './constants';
 import Fields from '@/components/organisms/field';
 import { createGrpcClient } from '@/libs/grpc/configs';
-import { jsonParse } from '@/utils/common';
-
 export default function ServicesPage() {
+  const [messageApi, contextHolder] = message.useMessage();
+
   const { slug } = useParams();
   const service = slug ? SERVICES[slug] : undefined
   if (!service) return <div>
@@ -13,6 +13,7 @@ export default function ServicesPage() {
   </div>
   return (
     <div>
+      {contextHolder}
       <Collapse items={Object.keys((service.methods)).map(((key, index) => {
           const method = service.methods[key]
           return {
@@ -21,11 +22,16 @@ export default function ServicesPage() {
             children: <div key={key} className=''>
             <Fields fieldInfos={Array.from(method.I.fields.list())} onSubmitFn={async (req) => {
               const client = createGrpcClient(service)
-              if(client) {
-                const data = await client[key](jsonParse(req))
-                return data
+              if(!client) {
+                messageApi.open({
+                  type: 'success',
+                  content: 'Please add setting domain',
+                  duration: 5,
+                })
+                return ""
               }
-              return ""
+              const data = await client[key](req)
+              return data
             }} />
           </div>
           }
